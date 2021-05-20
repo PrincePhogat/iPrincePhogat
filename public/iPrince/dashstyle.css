@@ -87,4 +87,14 @@ header{
     color: red;
 }
 
+.messages{
+    padding-top: 40px;
+    padding-left: 50px;
+    margin-left: 200px;
+    margin-top: 20px;
+    font-family: sans-serif;
+    text-decoration: none;
+    float: right;
+}
+
 /* styles for viewing form data */

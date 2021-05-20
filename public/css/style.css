@@ -623,3 +623,13 @@ a {
 .letter-spacing {
   letter-spacing: .2rem;
   color: rgba(255, 255, 255, 0.5) !important; }
+
+  .viewcount {
+    padding-left: 30px;
+    background: #bac964;
+    font-size:20px;
+    font-weight: 1000;
+    color: #fff;
+  }
+
+  
