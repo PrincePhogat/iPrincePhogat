@@ -1,20 +1,37 @@
 <html>
 
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="images/logo.png">
     <title>
         Admin Login
     </title>
 </head>
 
-<body onload="getResume()">
-    <form id="loginForm">
-        <input type="email" id="email" name="email" placeholder="Enter EMAIL" required>
-        <input type="password" id="pass" name="password" placeholder="Enter PASSWORD" required>
-        <input type="submit" value="Login Now">
-        <p id="uid">Not Logged IN</p>
-        <button onclick="logOut()">Log Out</button>
 
-    </form>
+<body onload="getResume()">
+    <div class="login-box">
+        <h1>LOGIN</h1>
+        <form id="loginForm">
+            <div class="textbox">
+                <i class="fas fa-user"></i>
+                <input type="email" id="email" name="email" placeholder="Enter EMAIL" required>
+            </div>
+            <div class="textbox">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="pass" name="password" placeholder="Enter PASSWORD" required>
+            </div>
+
+            <input type="submit" value="Login Now" class="btn">
+            <p id="uid">Not Logged IN</p>
+            <!--<button onclick="logOut()">Log Out</button>-->
+
+        </form>
+
+    </div>
+
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"></script>
@@ -78,26 +95,26 @@
             firebase.auth().signOut();
         }
 
-        function getResume() {
-            var docRef = firebase.firestore().collection("files").doc("resume");
-            docRef.get().then((doc) => {
-                if (doc.exists) {
-                    var url = doc.data()['url'];
-                    console.log(url);
-                    var a = document.createElement('a');
-                    var linkText = document.createTextNode("My Resume");
-                    a.appendChild(linkText);
-                    a.title = "My Resume";
-                    a.href = url;
-                    document.body.appendChild(a);
-                } else {
-                    // doc.data() will be undefined in this case
-                    console.log("No such document!");
-                }
-            }).catch((error) => {
-                console.log("Error getting document:", error);
-            });
-        }
+ //        function getResume() {
+   //         var docRef = firebase.firestore().collection("files").doc("resume");
+     //       docRef.get().then((doc) => {
+       //         if (doc.exists) {
+         //           var url = doc.data()['url'];
+           //         console.log(url);
+             //       var a = document.createElement('a');
+               //     var linkText = document.createTextNode("My Resume");
+                 //   a.appendChild(linkText);
+                   // a.title = "My Resume";
+  //                  a.href = url;
+    //                document.body.appendChild(a);
+      //          } else {
+        //            // doc.data() will be undefined in this case
+          //          console.log("No such document!");
+            //    }
+ //           }).catch((error) => {
+   //             console.log("Error getting document:", error);
+     //       });
+       // } 
     </script>
 
 </body>
