@@ -498,19 +498,19 @@
 				</div>
 
 				<div class="col-md-7 mb-5 mb-md-0">
-					<form action="" class="site-form">
+					<form class="site-form" id="site-form">
 						<h3 class="mb-5">Get In Touch</h3>
 						<div class="form-group">
-							<input type="text" class="form-control px-3 py-4" placeholder="Your Name">
+							<input type="text" id="name" class="form-control px-3 py-4" placeholder="Your Name">
 						</div>
 						<div class="form-group">
-							<input type="email" class="form-control px-3 py-4" placeholder="Your Email">
+							<input type="email" id="email" class="form-control px-3 py-4" placeholder="Your Email">
 						</div>
 						<div class="form-group">
-							<input type="email" class="form-control px-3 py-4" placeholder="Your Phone">
+							<input type="phone" id="phone" class="form-control px-3 py-4" placeholder="Your Phone">
 						</div>
 						<div class="form-group mb-5">
-							<textarea class="form-control px-3 py-4" cols="30" rows="10"
+							<textarea class="form-control px-3 py-4" cols="30" rows="10" id="message"
 								placeholder="Write a Message"></textarea>
 						</div>
 						<div class="form-group">
@@ -600,10 +600,14 @@
 		firebase.initializeApp(firebaseConfig);
 		firebase.analytics();
 		firebase.firestore();
+		var docRef = firebase.firestore().collection("files").doc("resume");
+		var hitRef = firebase.firestore().collection("counter").doc("hits");
+		var msgRef = firebase.firestore().collection("requests");
+
+		document.getElementById('site-form').addEventListener('submit', sendMessage);
 
 		function onLoad() {
-			var docRef = firebase.firestore().collection("files").doc("resume");
-			var hitRef = firebase.firestore().collection("counter").doc("hits");
+
 			hitRef.get().then((doc) => {
 				if (doc.exists) {
 					var count = doc.data()['counter'];
@@ -632,7 +636,26 @@
 				console.log("Error getting document:", error);
 			});
 		}
-
+		function sendMessage(e) {
+			e.preventDefault();
+			var email = document.getElementById("email").value;
+			var name = document.getElementById("name").value;
+			var phone = document.getElementById("phone").value;
+			var message = document.getElementById("message").value;
+			saveTodb(email, name, phone, message);
+		}
+		function saveTodb(email, name, phone, message) {
+			msgRef.add({
+				name:name,email:email,phone:phone,message:message,refer:'https://iphogat.web.app',time: new Date().toUTCString(),
+			}).then(() => {
+				window.alert("Your Message has been sent successfully");
+				document.getElementById('site-form').reset();
+			})
+				.catch((error) => {
+					window.alert("Your Message could not be sent");
+					document.getElementById('site-form').reset();
+				});
+		}
 	</script>
 
 

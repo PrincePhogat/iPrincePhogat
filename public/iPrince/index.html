@@ -1,121 +1,45 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="images/logo.png">
-    <title>
-        Admin Login
-    </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="images/logo.png">
+  <title>
+    Admin Login
+  </title>
 </head>
 
 
-<body onload="getResume()">
-    <div class="login-box">
-        <h1>LOGIN</h1>
-        <form id="loginForm">
-            <div class="textbox">
-                <i class="fas fa-user"></i>
-                <input type="email" id="email" name="email" placeholder="Enter EMAIL" required>
-            </div>
-            <div class="textbox">
-                <i class="fas fa-lock"></i>
-                <input type="password" id="pass" name="password" placeholder="Enter PASSWORD" required>
-            </div>
+<body>
+  <div class="login-box">
+    <h1>LOGIN</h1>
+    <form id="loginForm">
+      <div class="textbox">
+        <i class="fas fa-user"></i>
+        <input type="email" id="email" name="email" placeholder="Enter EMAIL" required>
+      </div>
+      <div class="textbox">
+        <i class="fas fa-lock"></i>
+        <input type="password" id="pass" name="password" placeholder="Enter PASSWORD" required>
+      </div>
 
-            <input type="submit" value="Login Now" class="btn">
-            <p id="uid">Not Logged IN</p>
-            <!--<button onclick="logOut()">Log Out</button>-->
+      <input type="submit" value="Login Now" class="btn">
 
-        </form>
 
-    </div>
+    </form>
 
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
-    <script>
+  </div>
 
-        var firebaseConfig = {
-            apiKey: "AIzaSyDIMXIIyzSECdwQ4yR4tJFmgx0zxK7lY_o",
-            authDomain: "iphogat.firebaseapp.com",
-            databaseURL: "https://iphogat-default-rtdb.europe-west1.firebasedatabase.app",
-            projectId: "iphogat",
-            storageBucket: "iphogat.appspot.com",
-            messagingSenderId: "887961620478",
-            appId: "1:887961620478:web:763f55fd19fc581a0cbaaf",
-            measurementId: "G-MW9CXH02D7"
-        };
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        firebase.analytics();
-        firebase.auth();
-        firebase.firestore();
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
 
-        // Listen for form submit
-        document.getElementById('loginForm').addEventListener('submit', login);
+  <script src="auth.js">
 
-        function login(e) {
-            e.preventDefault();
-            var email = document.getElementById("email").value;
-            var pass = document.getElementById("pass").value;
-            //console.log(email+pass);
-            authenticate(email, pass);
-        }
-
-        function authenticate(email, pass) {
-            firebase.auth().signInWithEmailAndPassword(email, pass)
-                .then((userCredential) => {
-                    console.log("user logged in");
-
-                })
-                .catch((error) => {
-                    var errorCode = error.code;
-                    var errorMessage = error.message;
-                    // ..
-                });
-        }
-
-        firebase.auth().onAuthStateChanged((user) => {
-            if (user) {
-                var uid = user.uid;
-                document.getElementById("uid").innerText = uid;
-                //create anchor element for accessing db value
-                //getResume();
-            } else {
-                // User is signed out
-                document.getElementById("uid").innerText = "Logged Out";
-            }
-        });
-
-        function logOut() {
-            firebase.auth().signOut();
-        }
-
- //        function getResume() {
-   //         var docRef = firebase.firestore().collection("files").doc("resume");
-     //       docRef.get().then((doc) => {
-       //         if (doc.exists) {
-         //           var url = doc.data()['url'];
-           //         console.log(url);
-             //       var a = document.createElement('a');
-               //     var linkText = document.createTextNode("My Resume");
-                 //   a.appendChild(linkText);
-                   // a.title = "My Resume";
-  //                  a.href = url;
-    //                document.body.appendChild(a);
-      //          } else {
-        //            // doc.data() will be undefined in this case
-          //          console.log("No such document!");
-            //    }
- //           }).catch((error) => {
-   //             console.log("Error getting document:", error);
-     //       });
-       // } 
-    </script>
+    
+  </script>
 
 </body>
 
